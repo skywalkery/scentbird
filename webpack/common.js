@@ -8,7 +8,7 @@ const basePath = (file) => path.resolve(process.cwd(), file)
 const webpackConfig = {
 
   entry: {
-    'app': basePath('site/index.js'),
+    'app': basePath('src/index.js'),
   },
 
   output: {
@@ -20,6 +20,24 @@ const webpackConfig = {
 
   module: {
     rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+            },
+          },
+          {
+            loader: 'eslint-loader',
+            options: {
+              cache: true,
+            },
+          },
+        ],
+      },
       {
         test: /\.css$/,
         use: [
@@ -50,7 +68,7 @@ const webpackConfig = {
 
   resolve: {
     modules: [
-      basePath('site'),
+      basePath('src'),
       'node_modules',
     ],
     extensions: [ '.js', '.scss' ],
