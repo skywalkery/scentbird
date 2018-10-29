@@ -1,0 +1,26 @@
+{
+  "root": true,
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "rules": {
+    "no-nested-ternary": [0],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  },
+  "overrides": [
+    {
+      "files": ["*.stories.js"],
+      "rules": {
+        "import/no-extraneous-dependencies": "off"
+      }
+    }
+  ],
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
+  }
+}
