@@ -1,14 +1,22 @@
+@import '../../../config/variables';
+
 .container {
   display: flex;
   justify-content: space-between;
+  flex-flow: row wrap;
 
   button {
     min-width: 190px;
+    flex: 1 1 auto;
+    margin-top: 25px;
   }
 }
 
 .column {
   display: flex;
+  align-items: center;
+  margin-top: 25px;
+  margin-right: 40px;
 }
 
 .preview {

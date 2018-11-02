@@ -1,8 +1,10 @@
 @import '../../config/variables';
 
 main {
-  max-width: $layout-max-width;
+  max-width: $desktop-max-width;
   margin: 0 auto;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 body {
