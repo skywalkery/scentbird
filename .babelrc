@@ -9,7 +9,8 @@
           "constants": "./src/config/constants",
           "env": "./src/config/env",
           "helpers": "./src/helpers",
-          "ducks": "./src/state/ducks"
+          "ducks": "./src/state/ducks",
+          "shared": "./src/views/shared"
         }
       }
     ]

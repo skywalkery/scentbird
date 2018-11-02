@@ -1,0 +1,27 @@
+@import '../../../config/variables';
+
+$button-main-bckg-color: $main-highlight-color;
+$button-main-bckg-hover-color: #ff5f9e;
+$button-main-color: #fff;
+
+.button {
+  background-color: $button-main-bckg-color;
+  min-width: 160px;
+  height: 50px;
+  padding: 0 20px;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  color: $button-main-color;
+  user-select: none;
+  transition: all .13s ease;
+
+  &:hover {
+    background-color: $button-main-bckg-hover-color;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-header {
+  font-size: 24px;
+}
+
+.brand {
+  composes: main-header;
+  text-transform: uppercase;
+}
+
+.name {
+  composes: main-header;
+}
+
+.category {
+  font-size: 14px;
+}
+
+.rating {
+  margin-top: 15px;
+}

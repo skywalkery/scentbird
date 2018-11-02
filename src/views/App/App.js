@@ -1,9 +1,19 @@
 import React from 'react';
+import { compose } from 'recompose';
 
-import { ProductPage}  from 'views';
+import { ProductPage, Header } from 'views';
+import { styled } from 'helpers/hocs';
+import './bootstrap-reboot.css';
+import './tabs.scss';
+import styles from './styles.scss';
 
 const App = () => (
-  <ProductPage />
+  <React.Fragment>
+    <Header />
+    <main>
+      <ProductPage />
+    </main>
+  </React.Fragment>
 );
 
-export default App;
+export default compose(styled(styles))(App);

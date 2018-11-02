@@ -1,0 +1,53 @@
+@import '../../config/variables';
+
+.container {
+  display: flex;
+  margin-top: 30px;
+}
+
+.preview-col {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.preview-wrapper {
+  position: relative;
+  width: 458px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+
+  img {
+    object-fit: contain;
+  }
+}
+
+.gender-ico {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.info-col {
+  width: 50%;
+}
+
+.selected-option {
+  border-top: 1px solid $border-faded-color;
+  margin-top: 25px;
+  padding-top: 25px;
+}
+
+.option-list {
+  margin-top: 25px;
+}
+
+.description {
+  margin-top: 30px;
+}
+
+.disclaimer {
+  margin-top: 30px;
+}

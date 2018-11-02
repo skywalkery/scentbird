@@ -1,0 +1,7 @@
+@import '../../../config/variables';
+
+.more-less {
+  color: $main-highlight-color;
+  cursor: pointer;
+  user-select: none;
+}

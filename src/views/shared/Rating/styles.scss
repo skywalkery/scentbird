@@ -1,0 +1,16 @@
+@import '../../../config/variables';
+
+$empty-color: #dddddd;
+$full-color: $main-highlight-color;
+
+.rating {
+  color: $empty-color;
+
+  & > span ~ span {
+    margin-left: 5px;
+  }
+}
+
+.fa-star-highlighted {
+  color: $full-color;
+}

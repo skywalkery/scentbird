@@ -10,6 +10,7 @@ const port      = 5100
 const app       = express()
 const compiler  = webpack(webpackConfig)
 
+app.use(express.static('static'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(historyApiFallback())
 app.use(webpackMiddleware(compiler, webpackConfig.devServer))
