@@ -4,7 +4,6 @@
   position: relative;
   width: 280px;
   height: 280px;
-  // width: 458px;
   display: flex;
   padding: 20px;
   margin: 0 auto;
@@ -17,6 +16,11 @@
   @media (min-device-width: $tablet-landscape-min-width) {
     width: 340px;
     height: 340px;
+  }
+
+  @media (min-device-width: $desktop-min-width) {
+    width: 458px;
+    height: 458px;
   }
 
   img {
@@ -33,5 +37,9 @@
 
   @media (min-device-width: $tablet-landscape-min-width) {
     right: 40px;
+  }
+
+  @media (min-device-width: $desktop-min-width) {
+    right: 45px;
   }
 }

@@ -11,8 +11,11 @@ main {
     padding-left: 40px;
     padding-right: 40px;
   }
-  // padding-left: 50px;
-  // padding-right: 50px;
+
+  @media (min-device-width: $desktop-min-width) {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
 }
 
 body {

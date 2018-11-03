@@ -3,9 +3,6 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { compose, pure } from 'recompose';
 import PropTypes from 'prop-types';
 
-// import { styled } from 'hocs';
-// import styles from './styles.scss';
-
 const Disclaimer = ({ className, howItWorksTxt, ingredientsTxt }) => (
   <Tabs className={className}>
     <TabList>
@@ -29,7 +26,4 @@ Disclaimer.defaultProps = {
   className: '',
 };
 
-export default compose(
-  pure
-  // styled(styles)
-)(Disclaimer);
+export default compose(pure)(Disclaimer);
