@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { Button } from 'shared';
 import { styled } from 'hocs';
+import priceFormat from 'helpers/priceFormat';
 import styles from './styles.scss';
 
 const SelectedOption = ({
@@ -23,7 +24,7 @@ const SelectedOption = ({
           <span>
             {isSubscription ? 'Subscription price' : 'One-time purchase'}:
           </span>
-          <span styleName="bold">${price}</span>
+          <span styleName="bold">{priceFormat(price)}</span>
         </div>
         <div>
           <span>Size:</span>

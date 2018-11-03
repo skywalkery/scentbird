@@ -9,6 +9,7 @@
           "constants": "./src/config/constants",
           "env": "./src/config/env",
           "hocs": "./src/hocs",
+          "helpers": "./src/helpers",
           "ducks": "./src/state/ducks",
           "shared": "./src/views/shared"
         }
