@@ -6,9 +6,11 @@ import {
   branch,
   renderComponent,
   lifecycle,
+  withPropsOnChange,
 } from 'recompose';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { productActions, productSelectors } from 'ducks/product';
 import { styled, deviceScreenDetector } from 'hocs';
@@ -76,6 +78,10 @@ ProductPage.propTypes = {
 
 export default compose(
   deviceScreenDetector,
+  withRouter,
+  withPropsOnChange(['match'], ({ match }) => ({
+    productId: match.params.id,
+  })),
   connect(
     state => ({
       product: state.product.data,
@@ -89,7 +95,8 @@ export default compose(
   ),
   lifecycle({
     componentDidMount() {
-      this.props.get(1);
+      const { get, productId } = this.props;
+      get(productId);
     },
   }),
   branch(({ isLoading }) => isLoading, renderComponent(ProductLoading)),

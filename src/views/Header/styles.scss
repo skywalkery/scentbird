@@ -1,4 +1,38 @@
+@import '../../config/variables';
+
 header {
   height: 60px;
   background-color: #1a1a1a;
+}
+
+.nav-active {
+  color: $main-highlight-color;
+}
+
+nav {
+  height: 100%;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    li {
+      a {
+        color: $font-faded-color;
+        padding: 5px 20px;
+        font-size: 24px;
+
+        &:focus {
+          outline: none;
+        }
+
+        &:hover {
+          color: #ff5f9e;
+          text-decoration: none;
+        }
+      }
+    }
+  }
 }

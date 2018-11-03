@@ -1,5 +1,6 @@
 import React from 'react';
-import { compose } from 'recompose';
+import { compose, pure } from 'recompose';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 import { ProductPage, Header } from 'views';
 import { styled } from 'hocs';
@@ -11,9 +12,16 @@ const App = () => (
   <React.Fragment>
     <Header />
     <main>
-      <ProductPage />
+      <Switch>
+        <Route path="/product/:id" component={ProductPage} />
+        <Route path="/profile/shipping" component={null} />
+      </Switch>
     </main>
   </React.Fragment>
 );
 
-export default compose(styled(styles))(App);
+export default compose(
+  withRouter,
+  pure,
+  styled(styles)
+)(App);
