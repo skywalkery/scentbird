@@ -12,7 +12,10 @@
 
 .main-header {
   font-size: 18px;
-  // font-size: 24px;
+
+  @media (min-device-width: $tablet-portrait-min-width) {
+    font-size: 24px;
+  }
 }
 
 .brand {
@@ -26,7 +29,10 @@
 
 .category {
   font-size: 12px;
-  // font-size: 14px;
+
+  @media (min-device-width: $tablet-portrait-min-width) {
+    font-size: 14px;
+  }
 }
 
 .rating {

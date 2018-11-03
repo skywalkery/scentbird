@@ -28,13 +28,19 @@
     text-transform: uppercase;
     border-color: $border-faded-color;
     user-select: none;
-
     font-size: 10px;
+
+    @media (min-device-width: $tablet-portrait-min-width) {
+      font-size: 14px;
+    }
   }
 
   .react-tabs__tab + .react-tabs__tab {
     margin-left: 5px;
-    // margin-left: 10px;
+
+    @media (min-device-width: $tablet-portrait-min-width) {
+      margin-left: 10px;
+    }
   }
 
   .react-tabs__tab--selected {

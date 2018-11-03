@@ -1,7 +1,13 @@
+@import '../../../config/variables';
+
 .header {
   font-size: 16px;
   text-align: center;
-  // font-size: 18px;
   text-transform: uppercase;
   margin-bottom: 5px;
+
+  @media (min-device-width: $tablet-portrait-min-width) {
+    font-size: 18px;
+    text-align: left;
+  }
 }
