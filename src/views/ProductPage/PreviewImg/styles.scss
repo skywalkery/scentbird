@@ -1,0 +1,24 @@
+.preview-wrapper {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  // width: 458px;
+  display: flex;
+  // justify-content: center;
+  // align-items: flex-start;
+  padding: 20px;
+  margin: 0 auto;
+
+  img {
+    object-fit: contain;
+    margin: 0 auto;
+  }
+}
+
+.gender-ico {
+  position: absolute;
+  right: 20px;
+  // right: 40px;
+  top: 20px;
+  font-size: 2em;
+}

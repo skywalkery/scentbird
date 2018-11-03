@@ -1,13 +1,14 @@
 import React from 'react';
-import Img from 'react-image';
-import { compose, pure } from 'recompose';
+import { compose, pure, withProps } from 'recompose';
+import PropTypes from 'prop-types';
 
-import { styled } from 'helpers/hocs';
+import { styled, deviceScreenDetector } from 'hocs';
 import Info from './Info/Info';
 import SelectedOption from './SelectedOption/SelectedOption';
 import OptionList from './OptionList/OptionList';
 import Description from './Description/Description';
 import Disclaimer from './Disclaimer/Disclaimer';
+import PreviewImg from './PreviewImg/PreviewImg';
 import styles from './styles.scss';
 
 const product = {
@@ -57,18 +58,13 @@ const product = {
 
 const selectedOption = product.items[0];
 
-const ProductPage = () => (
+const ProductPage = ({ isLeftColumnExists }) => (
   <div styleName="container">
-    <div styleName="preview-col">
-      <div styleName="preview-wrapper">
-        <Img src={product.previews.big} />
-        <i
-          className={`fas fa-3x fa-${
-            product.sex === 'female' ? 'venus' : 'mars'
-          } ${styles['gender-ico']}`}
-        />
+    {isLeftColumnExists && (
+      <div styleName="preview-col">
+        <PreviewImg src={product.previews.big} sex={product.sex} />
       </div>
-    </div>
+    )}
     <div styleName="info-col">
       <Info
         brand={product.brand}
@@ -76,6 +72,9 @@ const ProductPage = () => (
         name={product.name}
         rating={product.rating}
       />
+      {!isLeftColumnExists && (
+        <PreviewImg src={product.previews.big} sex={product.sex} />
+      )}
       <SelectedOption
         styleName="selected-option"
         previewUrl={selectedOption.img}
@@ -95,7 +94,15 @@ const ProductPage = () => (
   </div>
 );
 
+ProductPage.propTypes = {
+  isLeftColumnExists: PropTypes.bool.isRequired,
+};
+
 export default compose(
+  deviceScreenDetector,
+  withProps(({ deviceScreenType: { isDesktop, isTabletLandscape } }) => ({
+    isLeftColumnExists: isDesktop || isTabletLandscape,
+  })),
   pure,
   styled(styles)
 )(ProductPage);

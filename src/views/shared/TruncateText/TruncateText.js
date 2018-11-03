@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import * as R from 'ramda';
 import { Identity } from 'ramda-fantasy';
 
-import { styled } from 'helpers/hocs';
+import { styled } from 'hocs';
 import styles from './styles.scss';
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */

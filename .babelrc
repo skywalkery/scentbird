@@ -8,7 +8,7 @@
           "views": "./src/views",
           "constants": "./src/config/constants",
           "env": "./src/config/env",
-          "helpers": "./src/helpers",
+          "hocs": "./src/hocs",
           "ducks": "./src/state/ducks",
           "shared": "./src/views/shared"
         }

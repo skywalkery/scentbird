@@ -3,7 +3,7 @@ import ReactRating from 'react-rating';
 import { compose, pure } from 'recompose';
 import PropTypes from 'prop-types';
 
-import { styled } from 'helpers/hocs';
+import { styled } from 'hocs';
 import styles from './styles.scss';
 
 const Rating = ({ value, onChange, isReadOnly }) => (

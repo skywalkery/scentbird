@@ -1,12 +1,16 @@
-$desktop-max-width: 1240px;
-$desktop-min-width: 1025px;
-$tablet-landscape-min-width: 600px;
+$mobile-min-width: 320px;
+$mobile-max-width: 568px;
+$tablet-portrait-min-width: $mobile-max-width + 1px;
+$tablet-portrait-max-width: 768px;
+$tablet-landscape-min-width: $tablet-portrait-max-width + 1px;
 $tablet-landscape-max-width: 1024px;
+$desktop-min-width: $tablet-landscape-max-width + 1px;
+$desktop-max-width: 1240px;
 
 $font-color: #222222;
 $font-faded-color: #9b9b9b;
 
 $main-highlight-color: #ff408e;
 
-$border-faded-color: #e6e6e6;
 $border-color: #9b9b9b;
+$border-faded-color: #e6e6e6;

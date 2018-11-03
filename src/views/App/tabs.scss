@@ -28,10 +28,13 @@
     text-transform: uppercase;
     border-color: $border-faded-color;
     user-select: none;
+
+    font-size: 10px;
   }
 
   .react-tabs__tab + .react-tabs__tab {
-    margin-left: 10px;
+    margin-left: 5px;
+    // margin-left: 10px;
   }
 
   .react-tabs__tab--selected {

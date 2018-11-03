@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { compose, pure } from 'recompose';
 import PropTypes from 'prop-types';
 
-// import { styled } from 'helpers/hocs';
+// import { styled } from 'hocs';
 // import styles from './styles.scss';
 
 const Disclaimer = ({ className, howItWorksTxt, ingredientsTxt }) => (

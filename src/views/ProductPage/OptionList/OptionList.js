@@ -4,7 +4,7 @@ import { compose, pure, withHandlers, withState } from 'recompose';
 import PropTypes from 'prop-types';
 import * as R from 'ramda';
 
-import { styled } from 'helpers/hocs';
+import { styled } from 'hocs';
 import styles from './styles.scss';
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -25,9 +25,11 @@ const renderOption = ({
       aria-checked={isSelected}
     >
       <Img styleName="preview" src={img} />
-      <span>{`${volume} ${volumeUnit} ${
-        isSubscription ? 'Subscription' : 'One-time purchase'
-      }`}</span>
+      <div styleName="volume-container">
+        <span>{`${volume} ${volumeUnit}`}&nbsp;</span>
+        <span>{`${isSubscription ? 'Subscription' : 'One-time\u00A0'}`}</span>
+        {!isSubscription && <span styleName="purchase-word">purchase</span>}
+      </div>
     </div>
   </div>
 );

@@ -11,27 +11,12 @@
   justify-content: center;
 }
 
-.preview-wrapper {
-  position: relative;
-  width: 458px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 20px;
-
-  img {
-    object-fit: contain;
-  }
-}
-
-.gender-ico {
-  position: absolute;
-  right: 40px;
-  top: 20px;
-}
-
 .info-col {
-  width: 50%;
+  width: 100%;
+
+  @media (min-device-width: $tablet-landscape-min-width) {
+    width: 50%;
+  }
 }
 
 .selected-option {
