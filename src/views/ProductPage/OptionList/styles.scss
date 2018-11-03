@@ -27,6 +27,7 @@
   border: 1px solid $border-faded-color;
   user-select: none;
   transition: border-color .3s ease;
+  cursor: pointer;
 
   &:focus {
     outline: none;
@@ -36,6 +37,7 @@
 .option-selected {
   composes: option;
   border-color: $main-highlight-color;
+  cursor: default;
 }
 
 .volume-container {
