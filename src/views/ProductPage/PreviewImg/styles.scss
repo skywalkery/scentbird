@@ -6,14 +6,17 @@
   height: 280px;
   // width: 458px;
   display: flex;
-  // justify-content: center;
-  // align-items: flex-start;
   padding: 20px;
   margin: 0 auto;
 
   @media (min-device-width: $tablet-portrait-min-width) {
     width: 315px;
     height: 315px;
+  }
+
+  @media (min-device-width: $tablet-landscape-min-width) {
+    width: 340px;
+    height: 340px;
   }
 
   img {
@@ -25,7 +28,10 @@
 .gender-ico {
   position: absolute;
   right: 20px;
-  // right: 40px;
   top: 20px;
   font-size: 2em;
+
+  @media (min-device-width: $tablet-landscape-min-width) {
+    right: 40px;
+  }
 }
