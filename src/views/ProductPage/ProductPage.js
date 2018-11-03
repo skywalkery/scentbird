@@ -1,7 +1,16 @@
 import React from 'react';
-import { compose, pure, withProps } from 'recompose';
+import {
+  compose,
+  pure,
+  withProps,
+  branch,
+  renderComponent,
+  lifecycle,
+} from 'recompose';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
+import { productActions, productSelectors } from 'ducks/product';
 import { styled, deviceScreenDetector } from 'hocs';
 import Info from './Info/Info';
 import SelectedOption from './SelectedOption/SelectedOption';
@@ -9,56 +18,15 @@ import OptionList from './OptionList/OptionList';
 import Description from './Description/Description';
 import Disclaimer from './Disclaimer/Disclaimer';
 import PreviewImg from './PreviewImg/PreviewImg';
+import ProductLoading from './ProductLoading';
 import styles from './styles.scss';
 
-const product = {
-  previews: {
-    big: '/assets/product-image-big.png',
-    small: '/assets/product-image-big.png',
-  },
-  brand: 'Scentbird',
-  category: 'Hand Cream',
-  name: 'Rose & Prosecco',
-  sex: 'female',
-  rating: {
-    average: 4.6,
-    count: 245,
-  },
-  items: [
-    {
-      id: 1,
-      isSubscription: true,
-      price: 14.95,
-      volume: 1.7,
-      volumeUnit: 'oz',
-      img: '/assets/product-image-big.png',
-    },
-    {
-      id: 2,
-      price: 12,
-      volume: 1,
-      volumeUnit: 'oz',
-      img: '/assets/product-image-big.png',
-    },
-    {
-      id: 3,
-      price: 16.5,
-      volume: 1.7,
-      volumeUnit: 'oz',
-      img: '/assets/product-image-big.png',
-    },
-  ],
-  description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque commodo lobortis ante, sed finibus arcu cursus in. Morbi condimentum, magna id dapibus placerat, dolor nulla luctus nunc, sed molestie purus ex nec sem. Nunc nisl odio, bibendum sed ipsum a, accumsan bibendum tortor. Proin feugiat enim quis quam ultricies suscipit. Vivamus feugiat tellus nec faucibus posuere. Nam in erat lorem. Ut id turpis in odio iaculis ultrices. Nulla non pellentesque massa, eget tristique ipsum. In et lectus gravida, pulvinar lorem et, porttitor ante. Suspendisse eget mi in urna viverra molestie. Proin sit amet eros semper, faucibus massa eu, pharetra ipsum.',
-  howItWorks:
-    'Rebottled Eau de Cartier Essence de Bois, rebottled by Scentbird, Inc., an independent bottler from a genuine product wholly independent of Cartier Scentbird, Inc., New York, NY 10001',
-  ingredients:
-    'Water, glycerin, glyceryl stearate se, stearyl alcohol, caprylic/capric triglyceride, fragrance (perfume), cetyl alcohol, dimethicone, rosa canina (rose) hip oil, chamomilla recutita (matricaria) flower extract, aloe barbadensis leaf extract, prunus armeniaca (apricot) kernel oil, allantoin, ethylhexylglycerin, stearic acid, sodium pca, xanthan gum, cetearyl alcohol, disodium edta, phenoxyethanol, butylphenyl methylpropional (lilial), citral, citronellol, geraniol, hydroxyisohexyl 3-cyclohexene carboxaldehyde  (lyral), limonene, linalool',
-};
-
-const selectedOption = product.items[0];
-
-const ProductPage = ({ isLeftColumnExists }) => (
+const ProductPage = ({
+  isLeftColumnExists,
+  product,
+  selectedOption,
+  selectOption,
+}) => (
   <div styleName="container">
     {isLeftColumnExists && (
       <div styleName="preview-col">
@@ -83,7 +51,12 @@ const ProductPage = ({ isLeftColumnExists }) => (
         volume={selectedOption.volume}
         volumeUnit={selectedOption.volumeUnit}
       />
-      <OptionList styleName="option-list" items={product.items} selectedId={1} />
+      <OptionList
+        styleName="option-list"
+        items={product.items}
+        selectedId={selectedOption.id}
+        select={selectOption}
+      />
       <Description styleName="description" text={product.description} />
       <Disclaimer
         styleName="disclaimer"
@@ -96,10 +69,30 @@ const ProductPage = ({ isLeftColumnExists }) => (
 
 ProductPage.propTypes = {
   isLeftColumnExists: PropTypes.bool.isRequired,
+  product: PropTypes.shape({}).isRequired,
+  selectedOption: PropTypes.shape({}).isRequired,
+  selectOption: PropTypes.func.isRequired,
 };
 
 export default compose(
   deviceScreenDetector,
+  connect(
+    state => ({
+      product: state.product.data,
+      isLoading: state.product.isLoading,
+      selectedOption: productSelectors.selectedOption(state),
+    }),
+    {
+      get: productActions.get,
+      selectOption: productActions.selectOption,
+    }
+  ),
+  lifecycle({
+    componentDidMount() {
+      this.props.get(1);
+    },
+  }),
+  branch(({ isLoading }) => isLoading, renderComponent(ProductLoading)),
   withProps(({ deviceScreenType: { isDesktop, isTabletLandscape } }) => ({
     isLeftColumnExists: isDesktop || isTabletLandscape,
   })),

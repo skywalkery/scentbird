@@ -37,15 +37,16 @@ const SelectedOption = ({
 
 SelectedOption.propTypes = {
   previewUrl: PropTypes.string.isRequired,
-  isSubscription: PropTypes.bool.isRequired,
   price: PropTypes.number.isRequired,
   volume: PropTypes.number.isRequired,
   volumeUnit: PropTypes.string.isRequired,
   className: PropTypes.string,
+  isSubscription: PropTypes.bool,
 };
 
 SelectedOption.defaultProps = {
   className: '',
+  isSubscription: false,
 };
 
 export default compose(

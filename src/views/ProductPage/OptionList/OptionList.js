@@ -1,8 +1,7 @@
 import React from 'react';
 import Img from 'react-image';
-import { compose, pure, withHandlers, withState } from 'recompose';
+import { compose, pure, withHandlers } from 'recompose';
 import PropTypes from 'prop-types';
-import * as R from 'ramda';
 
 import { styled } from 'hocs';
 import styles from './styles.scss';
@@ -91,7 +90,6 @@ OptionList.defaultProps = {
 };
 
 export default compose(
-  withState('selectedId', 'select', R.propOr(null, 'selectedId')),
   pure,
   styled(styles)
 )(OptionList);
