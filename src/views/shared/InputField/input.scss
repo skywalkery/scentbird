@@ -90,4 +90,9 @@ $input-padding: 12px;
   input {
     border: 2px solid $error-color;
   }
+
+  :global .react-select__control {
+    border: 2px solid;
+    border-color: $error-color !important;
+  }
 }

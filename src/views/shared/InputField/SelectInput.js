@@ -10,6 +10,7 @@ const DropdownIndicator = () => <div className={styles['down-arrow']} />;
 const SelectComponent = props => (
   <Select
     {...props}
+    className='react-select-container'
     classNamePrefix="react-select"
     components={{ DropdownIndicator }}
   />

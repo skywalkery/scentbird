@@ -10,6 +10,11 @@ $input-background-color: #fafafa;
   border: 1px solid;
   border-color: $border-faded-color !important;
   background-color: $input-background-color !important;
+  box-shadow: none !important;
+}
+
+:global .react-select__control--is-focused {
+  border-color: $border-focus-color !important;
 }
 
 :global .react-select__indicator-separator {
