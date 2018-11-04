@@ -6,6 +6,7 @@ import { Field } from 'redux-form';
 import { styled } from 'hocs';
 import Input from './Input';
 import validateRequired from './required';
+import onlyLetters from './onlyLetters';
 import styles from './styles.scss';
 
 const InputField = ({
@@ -54,13 +55,14 @@ InputField.defaultProps = {
 
 export default compose(
   withPropsOnChange(
-    ['isDisabled', 'isRequired'],
-    ({ isDisabled, isRequired }) => ({
+    ['isDisabled', 'isRequired', 'areOnlyLetters'],
+    ({ isDisabled, isRequired, areOnlyLetters }) => ({
       validators: isDisabled
         ? []
-        : [isRequired ? validateRequired : undefined].filter(
-            i => i !== undefined
-          ),
+        : [
+            isRequired ? validateRequired : undefined,
+            areOnlyLetters ? onlyLetters : undefined,
+          ].filter(i => i !== undefined),
     })
   ),
   pure,

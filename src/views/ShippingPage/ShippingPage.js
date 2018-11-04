@@ -21,6 +21,7 @@ const ShippingPage = ({ handleSubmit, submit, goBack }) => (
           type="text"
           label="First name"
           isRequired
+          areOnlyLetters
         />
         <InputField
           styleName="col-desktop-6"
@@ -28,6 +29,7 @@ const ShippingPage = ({ handleSubmit, submit, goBack }) => (
           type="text"
           label="Last name"
           isRequired
+          areOnlyLetters
         />
       </div>
       <div styleName="row">
