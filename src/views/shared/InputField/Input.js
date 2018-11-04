@@ -7,12 +7,14 @@ import styles from './input.scss';
 
 const isError = meta => meta.touched && meta.error && !meta.active;
 
-const Input = ({ type, input, meta, label }) => (
+const Input = ({ type, input, meta, label, isDisabled, inputClassName }) => (
   <div styleName="container">
     <div styleName={isError(meta) ? 'error-input-wrapper' : 'input-wrapper'}>
       <input
+        className={inputClassName}
         type={type}
         styleName={input.value ? 'filled-input' : ''}
+        disabled={isDisabled}
         {...input}
       />
       {label && (
@@ -31,10 +33,12 @@ Input.propTypes = {
   input: PropTypes.shape({}).isRequired,
   meta: PropTypes.shape({}).isRequired,
   label: PropTypes.string,
+  isDisabled: PropTypes.bool,
 };
 
 Input.defaultProps = {
   label: null,
+  isDisabled: false,
 };
 
 export default compose(

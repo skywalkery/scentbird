@@ -75,10 +75,11 @@ const ShippingPage = ({ handleSubmit, submit, goBack }) => (
       <div styleName="row">
         <InputField
           styleName="col-desktop-12"
+          inputClassName={styles['country-input']}
           name="country"
           type="text"
           label="Country"
-          isRequired
+          isDisabled
         />
       </div>
       <div styleName="row">
@@ -123,6 +124,7 @@ export default compose(
   connect(() => ({
     initialValues: {
       isBillingAddressSame: true,
+      country: 'United States',
     },
   })),
   reduxForm({ form: FORMS.SHIPPING_FORM }),

@@ -17,6 +17,7 @@ const InputField = ({
   component,
   className,
   validators,
+  inputClassName,
   ...props
 }) => (
   <div styleName="container" className={className}>
@@ -25,7 +26,8 @@ const InputField = ({
       // type={processor.nativeType || type}
       type={type}
       originalType={type}
-      disabled={isDisabled}
+      isDisabled={isDisabled}
+      inputClassName={inputClassName}
       // placeholder={placeholder || processor.placeholder}
       // format={processor.normalize}
       // normalize={processor.normalize}
