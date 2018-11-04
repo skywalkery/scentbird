@@ -6,8 +6,9 @@ const testProduct = { hello: 'world', items: [{ id: 1 }] };
 
 describe('product reducer', () => {
   it('PRODUCT_GET', () => {
-    expect(reducer(INITIAL_STATE, get)).toEqual({
-      ...INITIAL_STATE,
+    const initialState = { ...INITIAL_STATE, isLoading: false };
+    expect(reducer(initialState, get())).toEqual({
+      ...initialState,
       isLoading: true,
     });
   });
@@ -26,5 +27,9 @@ describe('product reducer', () => {
       ...INITIAL_STATE,
       selectedOptionId: 2,
     });
+  });
+
+  it('should return the initial state', () => {
+    expect(reducer(undefined, {})).toEqual(INITIAL_STATE);
   });
 });
