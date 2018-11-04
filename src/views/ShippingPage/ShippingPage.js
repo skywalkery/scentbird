@@ -18,8 +18,10 @@ const ShippingPage = ({
   handleSubmit,
   submit,
   goBack,
-  cityOptions,
-  stateOptions,
+  shippingCityOptions,
+  shippingStateOptions,
+  billingCityOptions,
+  billingStateOptions,
   isBillingAddressSame,
 }) => (
   <div styleName="container">
@@ -27,8 +29,8 @@ const ShippingPage = ({
       <div styleName="header">Shipping Address</div>
       <FormSection name="shipping">
         <FormFields
-          cityOptions={cityOptions}
-          stateOptions={stateOptions}
+          cityOptions={shippingCityOptions}
+          stateOptions={shippingStateOptions}
           hasPhone
         />
       </FormSection>
@@ -43,7 +45,10 @@ const ShippingPage = ({
         <React.Fragment>
           <div styleName="header">Billing Address</div>
           <FormSection name="billing">
-            <FormFields cityOptions={cityOptions} stateOptions={stateOptions} />
+            <FormFields
+              cityOptions={billingCityOptions}
+              stateOptions={billingStateOptions}
+            />
           </FormSection>
         </React.Fragment>
       )}
@@ -68,8 +73,10 @@ ShippingPage.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
-  cityOptions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  stateOptions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  shippingCityOptions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  shippingStateOptions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  billingCityOptions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  billingStateOptions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   isBillingAddressSame: PropTypes.bool,
 };
 
@@ -77,10 +84,10 @@ ShippingPage.defaultProps = {
   isBillingAddressSame: true,
 };
 
-const stateSelector = state =>
-  formValueSelector(FORMS.SHIPPING_FORM)(state, 'state');
-const citySelector = state =>
-  formValueSelector(FORMS.SHIPPING_FORM)(state, 'city');
+const stateSelector = (state, section) =>
+  formValueSelector(FORMS.SHIPPING_FORM)(state, `${section}.state`);
+const citySelector = (state, section) =>
+  formValueSelector(FORMS.SHIPPING_FORM)(state, `${section}.city`);
 const isBillingAddressSameSelector = state =>
   formValueSelector(FORMS.SHIPPING_FORM)(state, 'isBillingAddressSame');
 
@@ -111,22 +118,32 @@ export default compose(
       shipping: { country: 'United States' },
       billing: { country: 'United States' },
     },
-    currentState: stateSelector(state),
-    currentCity: citySelector(state),
+    currentShippingState: stateSelector(state, 'shipping'),
+    currentShippingCity: citySelector(state, 'shipping'),
+    currentBillingState: stateSelector(state, 'billing'),
+    currentBillingCity: citySelector(state, 'billing'),
     isBillingAddressSame: isBillingAddressSameSelector(state),
   })),
-  withPropsOnChange(['currentState'], ({ currentState }) => ({
-    cityOptions: getCitiesForState(currentState),
+  withPropsOnChange(['currentShippingState'], ({ currentShippingState }) => ({
+    shippingCityOptions: getCitiesForState(currentShippingState),
   })),
-  withPropsOnChange(['currentCity'], ({ currentCity }) => ({
-    stateOptions: getStatesForCity(currentCity),
+  withPropsOnChange(['currentShippingCity'], ({ currentShippingCity }) => ({
+    shippingStateOptions: getStatesForCity(currentShippingCity),
+  })),
+  withPropsOnChange(['currentBillingState'], ({ currentBillingState }) => ({
+    billingCityOptions: getCitiesForState(currentBillingState),
+  })),
+  withPropsOnChange(['currentBillingCity'], ({ currentBillingCity }) => ({
+    billingStateOptions: getStatesForCity(currentBillingCity),
   })),
   reduxForm({ form: FORMS.SHIPPING_FORM }),
   withHandlers({
     goBack: ({ history }) => () => history.goBack(),
     submit: () => data =>
       /* eslint-disable-next-line no-console */
-      console.log(R.keys(data.billing).length === 1 ? R.omit(['billing'], data) : data),
+      console.log(
+        R.keys(data.billing).length === 1 ? R.omit(['billing'], data) : data
+      ),
   }),
   pure,
   styled(styles)
