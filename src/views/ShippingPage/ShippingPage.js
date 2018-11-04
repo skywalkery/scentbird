@@ -1,16 +1,19 @@
 import React from 'react';
-import { compose, pure, withHandlers } from 'recompose';
-import { reduxForm } from 'redux-form';
+import { compose, pure, withHandlers, withPropsOnChange } from 'recompose';
+import { reduxForm, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as R from 'ramda';
 
 import { styled } from 'hocs';
 import { FORMS } from 'constants';
 import { InputField, InputCheckboxField, Button } from 'shared';
+import states from './states.json';
+import cities from './cities.json';
 import styles from './styles.scss';
 
-const ShippingPage = ({ handleSubmit, submit, goBack }) => (
+const ShippingPage = ({ handleSubmit, submit, goBack, cityOptions }) => (
   <div styleName="container">
     <div styleName="header">Shipping Address</div>
     <form onSubmit={handleSubmit(submit)}>
@@ -60,15 +63,17 @@ const ShippingPage = ({ handleSubmit, submit, goBack }) => (
         <InputField
           styleName="col-desktop-4"
           name="city"
-          type="text"
-          label="City"
+          type="select"
+          options={cityOptions}
+          placeholder="City"
           isRequired
         />
         <InputField
           styleName="col-desktop-4"
           name="state"
-          type="text"
-          label="State"
+          type="select"
+          options={states}
+          placeholder="State"
           isRequired
         />
       </div>
@@ -117,15 +122,32 @@ ShippingPage.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
+  cityOptions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
+
+const stateSelector = state =>
+  formValueSelector(FORMS.SHIPPING_FORM)(state, 'state');
 
 export default compose(
   withRouter,
-  connect(() => ({
+  connect(state => ({
     initialValues: {
       isBillingAddressSame: true,
       country: 'United States',
     },
+    currentState: stateSelector(state),
+  })),
+  withPropsOnChange(['currentState'], ({ currentState }) => ({
+    cityOptions: R.uniq(
+      cities
+        .filter(
+          c =>
+            currentState
+              ? c.state === R.find(R.propEq('value', currentState), states).label
+              : true
+        )
+        .map(c => ({ label: c.city, value: c.city }))
+    ),
   })),
   reduxForm({ form: FORMS.SHIPPING_FORM }),
   withHandlers({
