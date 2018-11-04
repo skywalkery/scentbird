@@ -81,7 +81,7 @@ const webpackConfig = {
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       title: 'Scentbird',
-      template: basePath('site/index.html'),
+      template: basePath('static/index.html'),
       hash: false,
       filename: 'index.html',
       inject: 'body',

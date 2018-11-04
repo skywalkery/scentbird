@@ -3,6 +3,7 @@ import * as R from 'ramda';
 import throttle from 'lodash.throttle';
 
 let resizeListener = null;
+let references = 0;
 
 const MOBILE_MAX_WIDTH = 568;
 const TABLET_PORTRAIT_MAX_WIDTH = 768;
@@ -40,12 +41,18 @@ export default compose(
     componentDidMount() {
       const { handleResize } = this.props;
       if (resizeListener === null) {
-        resizeListener = window.addEventListener(
-          'resize',
-          throttle(handleResize, 400)
-        );
+        resizeListener = throttle(handleResize, 400);
+        window.addEventListener('resize', resizeListener);
       }
+      references += 1;
       handleResize();
+    },
+    componentWillUnmount() {
+      references -= 1;
+      if (references === 0) {
+        window.removeEventListener('resize', resizeListener);
+        resizeListener = null;
+      }
     },
   })
 );
