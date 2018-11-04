@@ -1,48 +1,14 @@
 import React from 'react';
-import { compose, pure, withHandlers, withProps } from 'recompose';
+import { compose, pure } from 'recompose';
 import PropTypes from 'prop-types';
 import * as R from 'ramda';
-import Select from 'react-select';
 
 import { styled } from 'hocs';
+import renderInput from './NativeInput';
+import renderSelect from './SelectInput';
 import styles from './input.scss';
 
 const isError = meta => meta.touched && meta.error && !meta.active;
-
-const renderInput = ({ inputClassName, type, input, isDisabled }) => (
-  <input
-    className={inputClassName}
-    type={type}
-    styleName={input.value ? 'filled-input' : ''}
-    disabled={isDisabled}
-    {...input}
-  />
-);
-
-const DropdownIndicator = () => <div className={styles['down-arrow']} />;
-
-const SelectComponent = props => (
-  <Select
-    {...props}
-    classNamePrefix="react-select"
-    components={{ DropdownIndicator }}
-  />
-);
-
-const SelectConnected = compose(
-  withHandlers({
-    onChange: ({ onChange }) => ({ value }) => onChange(value),
-    onBlur: ({ onBlur, value }) => () => onBlur(value),
-  }),
-  withProps(({ value, options, inputClassName }) => ({
-    value: R.find(R.propEq('value', value), options),
-    className: inputClassName,
-  })),
-  pure
-)(SelectComponent);
-const renderSelect = ({ input, ...props }) => (
-  <SelectConnected {...input} {...props} />
-);
 
 const renderComponent = ({ type, ...props }) =>
   R.cond([
