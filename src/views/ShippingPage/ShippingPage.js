@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 import { styled } from 'hocs';
 import { FORMS } from 'constants';
-import { Input, InputCheckboxField, Button } from 'shared';
+import { InputField, InputCheckboxField, Button } from 'shared';
 import styles from './styles.scss';
 
 const ShippingPage = ({ handleSubmit, submit, goBack }) => (
@@ -14,27 +14,30 @@ const ShippingPage = ({ handleSubmit, submit, goBack }) => (
     <div styleName="header">Shipping Address</div>
     <form onSubmit={handleSubmit(submit)}>
       <div styleName="row">
-        <Input
+        <InputField
           styleName="col-desktop-6"
           name="first"
           type="text"
           label="First name"
+          isRequired
         />
-        <Input
+        <InputField
           styleName="col-desktop-6"
           name="last"
           type="text"
           label="Last name"
+          isRequired
         />
       </div>
       <div styleName="row">
-        <Input
+        <InputField
           styleName="col-desktop-8"
           name="street"
           type="text"
           label="Street address"
+          isRequired
         />
-        <Input
+        <InputField
           styleName="col-desktop-4"
           name="apt"
           type="text"
@@ -42,25 +45,39 @@ const ShippingPage = ({ handleSubmit, submit, goBack }) => (
         />
       </div>
       <div styleName="row">
-        <Input
+        <InputField
           styleName="col-desktop-4"
           name="zip"
           type="text"
           label="Zip code"
+          isRequired
         />
-        <Input styleName="col-desktop-4" name="city" type="text" label="City" />
-        <Input styleName="col-desktop-4" name="state" type="text" label="State" />
+        <InputField
+          styleName="col-desktop-4"
+          name="city"
+          type="text"
+          label="City"
+          isRequired
+        />
+        <InputField
+          styleName="col-desktop-4"
+          name="state"
+          type="text"
+          label="State"
+          isRequired
+        />
       </div>
       <div styleName="row">
-        <Input
+        <InputField
           styleName="col-desktop-12"
           name="country"
           type="text"
           label="Country"
+          isRequired
         />
       </div>
       <div styleName="row">
-        <Input
+        <InputField
           styleName="col-desktop-6"
           name="phone"
           type="text"
@@ -78,7 +95,7 @@ const ShippingPage = ({ handleSubmit, submit, goBack }) => (
         />
       </div>
       <div styleName="button-row">
-        <Button>
+        <Button type="submit">
           Buy Now
           <i styleName="icon-arrow-left" />
         </Button>

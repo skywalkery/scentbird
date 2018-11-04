@@ -1,21 +1,22 @@
 import React from 'react';
-import { compose, pure } from 'recompose';
+import { compose, pure, withPropsOnChange } from 'recompose';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 
 import { styled } from 'hocs';
+import Input from './Input';
+import validateRequired from './required';
 import styles from './styles.scss';
 
-const renderField = ({ type, input }) => (
-  <input type={type} styleName={input.value ? 'filled-input' : ''} {...input} />
-);
-
-const renderFieldEnchanced = compose(
-  pure,
-  styled(styles)
-)(renderField);
-
-const Input = ({ name, type, isDisabled, label, component, className, ...props }) => (
+const InputField = ({
+  name,
+  type,
+  isDisabled,
+  component,
+  className,
+  validators,
+  ...props
+}) => (
   <div styleName="container" className={className}>
     <Field
       name={name}
@@ -26,30 +27,25 @@ const Input = ({ name, type, isDisabled, label, component, className, ...props }
       // placeholder={placeholder || processor.placeholder}
       // format={processor.normalize}
       // normalize={processor.normalize}
-      // validate={validators}
-      component={component || renderFieldEnchanced}
+      validate={validators}
+      component={component || Input}
       // processor={processor}
       {...props}
     />
-    {label && (
-      <div styleName="label">
-        <span styleName="label-top" />
-        <span styleName="label-text">{label}</span>
-      </div>
-    )}
   </div>
 );
 
-Input.propTypes = {
+InputField.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   component: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   className: PropTypes.string,
   isDisabled: PropTypes.bool,
   label: PropTypes.string,
+  validators: PropTypes.arrayOf(PropTypes.func).isRequired,
 };
 
-Input.defaultProps = {
+InputField.defaultProps = {
   component: null,
   className: '',
   isDisabled: false,
@@ -57,6 +53,16 @@ Input.defaultProps = {
 };
 
 export default compose(
+  withPropsOnChange(
+    ['isDisabled', 'isRequired'],
+    ({ isDisabled, isRequired }) => ({
+      validators: isDisabled
+        ? []
+        : [isRequired ? validateRequired : undefined].filter(
+            i => i !== undefined
+          ),
+    })
+  ),
   pure,
   styled(styles)
-)(Input);
+)(InputField);
