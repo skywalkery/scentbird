@@ -7,8 +7,8 @@ import { Checkbox } from 'shared';
 import { styled } from 'hocs';
 import styles from './styles.scss';
 
-const renderCheckbox = ({ label, input }) => (
-  <div styleName="container">
+const renderCheckbox = ({ label, input, className }) => (
+  <div styleName="container" className={className}>
     <Checkbox {...input} />
     <span>{label}</span>
   </div>

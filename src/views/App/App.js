@@ -6,6 +6,7 @@ import { ProductPage, Header, ShippingPage } from 'views';
 import { styled } from 'hocs';
 import './bootstrap-reboot.css';
 import './tabs.scss';
+import './flex-grid.scss';
 import styles from './styles.scss';
 
 const App = () => (

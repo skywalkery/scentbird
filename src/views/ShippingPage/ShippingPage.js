@@ -32,9 +32,9 @@ const ShippingPage = ({
           hasPhone
         />
       </FormSection>
-      <div styleName="row">
+      <div className="row">
         <InputCheckboxField
-          styleName="col-desktop-6"
+          className="col-xs-12 col-md-6"
           name="isBillingAddressSame"
           label="Use this address as my billing address"
         />
@@ -47,14 +47,18 @@ const ShippingPage = ({
           </FormSection>
         </React.Fragment>
       )}
-      <div styleName="button-row">
-        <Button type="submit">
-          Buy Now
-          <i styleName="icon-arrow-left" />
-        </Button>
-        <Button isSecondary onClick={goBack}>
-          Back
-        </Button>
+      <div className={`row ${styles['button-row']}`}>
+        <div className="col-xs-12">
+          <Button type="submit" styleName="button">
+            Buy Now
+            <i styleName="icon-arrow-left" />
+          </Button>
+        </div>
+        <div className="col-xs-12">
+          <Button styleName="button" isSecondary onClick={goBack}>
+            Back
+          </Button>
+        </div>
       </div>
     </form>
   </div>

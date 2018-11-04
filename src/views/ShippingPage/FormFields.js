@@ -8,9 +8,9 @@ import styles from './styles.scss';
 
 const FormFields = ({ hasPhone, cityOptions, stateOptions }) => (
   <React.Fragment>
-    <div styleName="row">
+    <div className="row">
       <InputField
-        styleName="col-desktop-6"
+        className="col-xs-12 col-md-6"
         name="first"
         type="text"
         label="First name"
@@ -18,7 +18,7 @@ const FormFields = ({ hasPhone, cityOptions, stateOptions }) => (
         areOnlyLetters
       />
       <InputField
-        styleName="col-desktop-6"
+        className="col-xs-12 col-md-6"
         name="last"
         type="text"
         label="Last name"
@@ -26,9 +26,9 @@ const FormFields = ({ hasPhone, cityOptions, stateOptions }) => (
         areOnlyLetters
       />
     </div>
-    <div styleName="row">
+    <div className="row">
       <InputField
-        styleName="col-desktop-8"
+        className="col-xs-12 col-md-8"
         name="street"
         type="text"
         label="Street address"
@@ -37,22 +37,22 @@ const FormFields = ({ hasPhone, cityOptions, stateOptions }) => (
         regexMessage="Only letters, digits and - are valid"
       />
       <InputField
-        styleName="col-desktop-4"
+        className="col-xs-12 col-md-4"
         name="apt"
         type="text"
         label="Apt/Suite (Optional)"
       />
     </div>
-    <div styleName="row">
+    <div className="row">
       <InputField
-        styleName="col-desktop-4"
+        className="col-xs-12 col-md-4"
         name="zip"
         type="text"
         label="Zip code"
         isRequired
       />
       <InputField
-        styleName="col-desktop-4"
+        className="col-xs-12 col-md-4"
         name="city"
         type="select"
         options={cityOptions}
@@ -60,7 +60,7 @@ const FormFields = ({ hasPhone, cityOptions, stateOptions }) => (
         isRequired
       />
       <InputField
-        styleName="col-desktop-4"
+        className="col-xs-12 col-md-4"
         name="state"
         type="select"
         options={stateOptions}
@@ -68,9 +68,9 @@ const FormFields = ({ hasPhone, cityOptions, stateOptions }) => (
         isRequired
       />
     </div>
-    <div styleName="row">
+    <div className="row">
       <InputField
-        styleName="col-desktop-12"
+        className="col-xs-12 col-md-12"
         inputClassName={styles['country-input']}
         name="country"
         type="text"
@@ -79,14 +79,14 @@ const FormFields = ({ hasPhone, cityOptions, stateOptions }) => (
       />
     </div>
     {hasPhone && (
-      <div styleName="row">
+      <div className="row">
         <InputField
-          styleName="col-desktop-6"
+          className="col-xs-12 col-md-6"
           name="phone"
           type="text"
           label="Mobile number (Optional)"
         />
-        <div className={`${styles['col-desktop-6']} ${styles.cell}`}>
+        <div className={`col-xs-12 col-md-6 ${styles['phone-info-cell']}`}>
           We may send you special discounts and offers
         </div>
       </div>
