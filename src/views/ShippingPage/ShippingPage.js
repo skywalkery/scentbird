@@ -13,7 +13,13 @@ import states from './states.json';
 import cities from './cities.json';
 import styles from './styles.scss';
 
-const ShippingPage = ({ handleSubmit, submit, goBack, cityOptions }) => (
+const ShippingPage = ({
+  handleSubmit,
+  submit,
+  goBack,
+  cityOptions,
+  stateOptions,
+}) => (
   <div styleName="container">
     <div styleName="header">Shipping Address</div>
     <form onSubmit={handleSubmit(submit)}>
@@ -72,7 +78,7 @@ const ShippingPage = ({ handleSubmit, submit, goBack, cityOptions }) => (
           styleName="col-desktop-4"
           name="state"
           type="select"
-          options={states}
+          options={stateOptions}
           placeholder="State"
           isRequired
         />
@@ -123,10 +129,32 @@ ShippingPage.propTypes = {
   submit: PropTypes.func.isRequired,
   goBack: PropTypes.func.isRequired,
   cityOptions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  stateOptions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
 const stateSelector = state =>
   formValueSelector(FORMS.SHIPPING_FORM)(state, 'state');
+const citySelector = state =>
+  formValueSelector(FORMS.SHIPPING_FORM)(state, 'city');
+
+const getCitiesForState = state =>
+  R.uniq(
+    cities
+      .filter(
+        c =>
+          state
+            ? c.state === R.find(R.propEq('value', state), states).label
+            : true
+      )
+      .map(c => ({ label: c.city, value: c.city }))
+  );
+const getStatesForCity = city =>
+  R.uniq(
+    states.filter(
+      s =>
+        city ? s.label === R.find(R.propEq('city', city), cities).state : true
+    )
+  );
 
 export default compose(
   withRouter,
@@ -136,18 +164,13 @@ export default compose(
       country: 'United States',
     },
     currentState: stateSelector(state),
+    currentCity: citySelector(state),
   })),
   withPropsOnChange(['currentState'], ({ currentState }) => ({
-    cityOptions: R.uniq(
-      cities
-        .filter(
-          c =>
-            currentState
-              ? c.state === R.find(R.propEq('value', currentState), states).label
-              : true
-        )
-        .map(c => ({ label: c.city, value: c.city }))
-    ),
+    cityOptions: getCitiesForState(currentState),
+  })),
+  withPropsOnChange(['currentCity'], ({ currentCity }) => ({
+    stateOptions: getStatesForCity(currentCity),
   })),
   reduxForm({ form: FORMS.SHIPPING_FORM }),
   withHandlers({
