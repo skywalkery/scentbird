@@ -2,7 +2,7 @@ import * as R from 'ramda';
 import { handleActions } from 'redux-actions';
 import types from './types';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   data: null,
   isLoading: true,
   selectedOptionId: null,

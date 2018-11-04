@@ -13,7 +13,8 @@
     "dev": "nodemon",
     "build": "npm run clean && cross-env DEBUG=app:* NODE_ENV=production node ./bin/compile",
     "lint:js": "esw src",
-    "lint:js:watch": "npm run lint:js -- --watch"
+    "lint:js:watch": "npm run lint:js -- --watch",
+    "test": "jest"
   },
   "engines": {
     "node": "=10.6.0",
@@ -71,6 +72,7 @@
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "file-loader": "^0.10.0",
     "html-webpack-plugin": "^2.24.1",
+    "jest": "^23.6.0",
     "node-sass": "^4.5.0",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.1.3",
