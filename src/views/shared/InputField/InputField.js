@@ -7,6 +7,7 @@ import { styled } from 'hocs';
 import Input from './Input';
 import validateRequired from './required';
 import onlyLetters from './onlyLetters';
+import regex from './regex';
 import styles from './styles.scss';
 
 const InputField = ({
@@ -55,13 +56,14 @@ InputField.defaultProps = {
 
 export default compose(
   withPropsOnChange(
-    ['isDisabled', 'isRequired', 'areOnlyLetters'],
-    ({ isDisabled, isRequired, areOnlyLetters }) => ({
+    ['isDisabled', 'isRequired', 'areOnlyLetters', 'regexMessage'],
+    ({ isDisabled, isRequired, withRegex, areOnlyLetters, regexMessage }) => ({
       validators: isDisabled
         ? []
         : [
             isRequired ? validateRequired : undefined,
             areOnlyLetters ? onlyLetters : undefined,
+            withRegex ? regex(withRegex, regexMessage) : undefined,
           ].filter(i => i !== undefined),
     })
   ),

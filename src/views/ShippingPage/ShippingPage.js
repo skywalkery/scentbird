@@ -39,6 +39,8 @@ const ShippingPage = ({ handleSubmit, submit, goBack }) => (
           type="text"
           label="Street address"
           isRequired
+          withRegex={/[^a-zA-Z0-9- ]/i}
+          regexMessage="Only letters, digits and - are valid"
         />
         <InputField
           styleName="col-desktop-4"
