@@ -3,6 +3,7 @@ import { compose, pure, withHandlers } from 'recompose';
 import { reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { styled } from 'hocs';
 import { FORMS } from 'constants';
@@ -115,10 +116,17 @@ ShippingPage.propTypes = {
 
 export default compose(
   withRouter,
+  connect(() => ({
+    initialValues: {
+      isBillingAddressSame: true,
+    },
+  })),
+  reduxForm({ form: FORMS.SHIPPING_FORM }),
   withHandlers({
     goBack: ({ history }) => () => history.goBack(),
+    /* eslint-disable-next-line no-console */
+    submit: () => data => console.log(data),
   }),
-  reduxForm({ form: FORMS.SHIPPING_FORM }),
   pure,
   styled(styles)
 )(ShippingPage);

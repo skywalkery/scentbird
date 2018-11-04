@@ -24,7 +24,7 @@ const ConnectedCheckbox = compose(
   styled(styles)
 )(renderCheckbox);
 
-const InputCheckboxField = ({ ...props }) => (
+const InputCheckboxField = props => (
   <Field component={ConnectedCheckbox} {...props} />
 );
 

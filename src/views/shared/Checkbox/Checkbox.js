@@ -4,7 +4,7 @@ import { compose, pure, withPropsOnChange } from 'recompose';
 import { styled } from 'hocs';
 import styles from './styles.scss';
 
-const Checkbox = ({ ...props }) => (
+const Checkbox = props => (
   <div styleName="container">
     <input styleName="checkbox" type="checkbox" {...props} />
     <div styleName="inner" />
