@@ -3,19 +3,26 @@
 $button-main-bckg-color: $main-highlight-color;
 $button-main-bckg-hover-color: #ff5f9e;
 $button-main-color: #fff;
+$button-main-border-color: transparent;
+
+$button-secondary-bckg-color: transparent;
+$button-secondary-bckg-hover-color: transparent;
+$button-secondary-color: $font-faded-color;
+$button-secondary-border-color: $border-faded-color;
 
 .button {
+  position: relative;
   background-color: $button-main-bckg-color;
   min-width: 160px;
   height: 50px;
   padding: 0 20px;
   text-transform: uppercase;
-  border: 1px solid transparent;
+  border: 1px solid $button-main-border-color;
   cursor: pointer;
   white-space: nowrap;
   color: $button-main-color;
   user-select: none;
-  transition: all .13s ease;
+  transition: background-color, border-color .13s ease;
 
   &:hover {
     background-color: $button-main-bckg-hover-color;
@@ -23,5 +30,16 @@ $button-main-color: #fff;
 
   &:focus {
     outline: none;
+  }
+}
+
+.button-secondary {
+  composes: button;
+  background-color: $button-secondary-bckg-color;
+  color: $button-secondary-color;
+
+  &:hover {
+    border-color: $button-secondary-border-color;
+    background-color: $button-secondary-bckg-hover-color;
   }
 }
